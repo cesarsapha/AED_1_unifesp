@@ -39,6 +39,6 @@ int main(){
     MergeSort(0, 400000, v);
     t = clock() - t;
 
-    printf("Tempo de execucao: %.6lf ms\n", ((double)t)/((CLOCKS_PER_SEC/1000)));
+    printf("Tempo de execucao: %lf ms\n", ((double)t)/((CLOCKS_PER_SEC/1000)));
 
 }
