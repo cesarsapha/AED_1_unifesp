@@ -2,51 +2,41 @@
 #include <stdlib.h>
 #include <time.h>
 
-int const TAM = 50000;
-
-int partition(int v[], int baixo, int alto) {
-    int pivot = v[alto]; 
+int troca(int v[], int baixo, int alto) {
+    int primeiro = v[alto]; 
     int i = baixo - 1; 
-
     for (int j = baixo; j < alto; j++) {
-        if (v[j] <= pivot) {
+        if (v[j] <= primeiro) {
             i++;
-            int temp = v[i];
+            int tempo = v[i];
             v[i] = v[j];
-            v[j] = temp;
+            v[j] = tempo;
         }
     }
-
-    int temp = v[i + 1];
+    int tempo = v[i + 1];
     v[i + 1] = v[alto];
-    v[alto] = temp;
-
+    v[alto] = tempo;
     return i + 1;
 }
-
-void quickSort(int v[], int baixo, int alto) {
+void QuickSort(int v[], int baixo, int alto) {
     if (baixo < alto) {
-        int pi = partition(v, baixo, alto);
-        quickSort(v, baixo, pi - 1);
-        quickSort(v, pi + 1, alto);
+        int pi = troca(v, baixo, alto);
+        QuickSort(v, baixo, pi - 1);
+        QuickSort(v, pi + 1, alto);
     }
 }
-
 int main() {
     clock_t t;
-    int vetor[TAM];
+    int vetor[50000];
 
     srand((unsigned)time(NULL));
-
-    for (int a = 0; a < TAM; a++) {
-        vetor[a] = rand() % TAM;
+    for (int a = 0; a < 50000; a++) {
+        vetor[a] = rand() % 50000;
     }
-
     t = clock();
-    quickSort(vetor, 0, TAM - 1);
+    QuickSort(vetor, 0, 50000 - 1);
     t = clock() - t;
 
     printf("Tempo de execucao: %lf ms\n", ((double)t)/((CLOCKS_PER_SEC/1000)));
-
     return 0;
 }
